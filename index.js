@@ -19,11 +19,29 @@ client.on("message_create", async (msg) => {
   if (msg.body == "!s" && msg.hasMedia) {
     const media = await msg.downloadMedia();
     const sticker = new MessageMedia(media.mimetype, media.data);
-    client.sendMessage(msg.from, sticker, {
-      sendMediaAsSticker: true,
-      stickerAuthor: "--",
-      stickerName: "--",
-    });
+    client
+      .sendMessage(msg.from, sticker, {
+        sendMediaAsSticker: true,
+        stickerAuthor: "--",
+        stickerName: "--",
+      })
+      .then(() => console.log("Sticker sent!"))
+      .catch((e) => console.log(e));
+  }
+});
+
+client.on("message", async (msg) => {
+  if (msg.body == "!s" && msg.hasMedia) {
+    const media = await msg.downloadMedia();
+    const sticker = new MessageMedia(media.mimetype, media.data);
+    client
+      .sendMessage(msg.from, sticker, {
+        sendMediaAsSticker: true,
+        stickerAuthor: "--",
+        stickerName: "--",
+      })
+      .then(() => console.log("Sticker sent!"))
+      .catch((e) => console.log(e));
   }
 });
 
